@@ -1,0 +1,52 @@
+{
+  "name": "react-tailwind-form-input",
+  "version": "1.0.0",
+  "description": "A **React + TypeScript** component with built-in **validation**, styled using **Tailwind CSS**. Includes a custom hook `useFormInput` for managing input value, error state, and validation logic.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "build": "tsc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JRanjan-Biswal/react-tailwind-form-input.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JRanjan-Biswal/react-tailwind-form-input/issues"
+  },
+  "homepage": "https://github.com/JRanjan-Biswal/react-tailwind-form-input#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [
+    "react",
+    "form",
+    "inputform",
+    "vaidation",
+    "reactform",
+    "inputvalidation",
+    "forminput",
+    "tailwindform",
+    "tailwind",
+    "customValidation",
+    "input"
+  ],
+  "author": "jyoti_ranjan_biswal",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.7",
+    "typescript": "^5.8.3"
+  }
+}
