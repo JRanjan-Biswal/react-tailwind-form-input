@@ -178,15 +178,10 @@ const TextareaExample = () => {
 ### useFormInput
 
 | Option                 | Type                                | Description                                        |
-
 | ---------------------- | ----------------------------------- | -------------------------------------------------- |
-
 | `initialValue`         | `string`                            | Initial input value                                |
-
-| `validations`          | `ValidationRules \|\| false`                   | Built-in validation config                         |
-
+| `validations`          | `ValidationRules \|\| false`        | Built-in validation config                         |
 | `customValidator`      | `(value: string) => true \| string` | Custom validator returning `true` or error message |
-
 | `suppressDefaultError` | `boolean`                           | Disable auto error rendering (optional)            |
 
 **Returns:**
@@ -194,19 +189,15 @@ const TextareaExample = () => {
 - `error`: Error message (if any)
 - `onChange`: Change event handler
 - `validate`: Function to manually validate the input
+- `setValue`: Function to programmatically set the value
 
 ### useFormSelect
 
 | Option                 | Type                                | Description                                        |
-
 | ---------------------- | ----------------------------------- | -------------------------------------------------- |
-
 | `initialValue`         | `string`                            | Initial select value                               |
-
 | `validations`          | `SelectValidationRules \|\| false` | Built-in validation config                         |
-
 | `customValidator`      | `(value: string) => true \| string` | Custom validator returning `true` or error message |
-
 | `suppressDefaultError` | `boolean`                           | Disable auto error rendering (optional)            |
 
 **Returns:**
@@ -214,19 +205,15 @@ const TextareaExample = () => {
 - `error`: Error message (if any)
 - `onChange`: Change event handler
 - `validate`: Function to manually validate the select
+- `setValue`: Function to programmatically set the value
 
 ### useFormTextarea
 
 | Option                 | Type                                | Description                                        |
-
 | ---------------------- | ----------------------------------- | -------------------------------------------------- |
-
 | `initialValue`         | `string`                            | Initial textarea value                            |
-
 | `validations`          | `TextareaValidationRules \|\| false` | Built-in validation config                         |
-
 | `customValidator`      | `(value: string) => true \| string` | Custom validator returning `true` or error message |
-
 | `suppressDefaultError` | `boolean`                           | Disable auto error rendering (optional)            |
 
 **Returns:**
@@ -234,6 +221,7 @@ const TextareaExample = () => {
 - `error`: Error message (if any)
 - `onChange`: Change event handler
 - `validate`: Function to manually validate the textarea
+- `setValue`: Function to programmatically set the value
 
 
 
@@ -278,55 +266,32 @@ const TextareaExample = () => {
 ### FormInput
 
 | Prop             | Type                                         | Description                       |
-
 | ---------------- | -------------------------------------------- | --------------------------------- |
-
 | `name`           | `string`                                     | Input name                        |
-
 | `value`          | `string`                                     | Current value                     |
-
 | `onChange`       | `(e: ChangeEvent<HTMLInputElement>) => void` | Input change handler              |
-
 | `error`          | `string` *(optional)*                        | Error message (from hook)         |
-
 | `placeholder`    | `string` *(optional)*                        | Input placeholder text            |
-
 | `type`           | `string` *(optional)*                        | Input type (e.g. `text`, `email`) |
-
 | `className`      | `string` *(optional)*                        | Wrapper className                 |
-
 | `inputClassName` | `string` *(optional)*                        | Input element className           |
-
 | `showError`      | `boolean` *(default: true)*                  | Show error message below input    |
 
 ### FormSelect
 
 | Prop             | Type                                         | Description                       |
-
 | ---------------- | -------------------------------------------- | --------------------------------- |
-
-| `name`           | `string`                                     | Select name                        |
-
+| `name`           | `string`                                     | Select name                       |
 | `value`          | `string` *(optional)*                        | Current value (controlled)        |
-
 | `defaultValue`   | `string` *(optional)*                        | Initial value (uncontrolled)      |
-
 | `onChange`       | `(e: ChangeEvent<HTMLSelectElement>) => void` | Select change handler             |
-
-| `options`        | `SelectOption[]`                             | Array of select options            |
-
+| `options`        | `SelectOption[]`                             | Array of select options           |
 | `error`          | `string` *(optional)*                        | Error message (from hook)         |
-
 | `placeholder`    | `string` *(optional)*                        | Placeholder option text           |
-
 | `className`      | `string` *(optional)*                        | Wrapper className                 |
-
-| `selectClassName` | `string` *(optional)*                        | Select element className           |
-
+| `selectClassName` | `string` *(optional)*                        | Select element className          |
 | `showError`      | `boolean` *(default: true)*                  | Show error message below select   |
-
 | `disabled`       | `boolean` *(optional)*                        | Disable the select                |
-
 | `renderOption`   | `(props: CustomOptionProps) => ReactElement` *(optional)* | Custom option renderer |
 
 **SelectOption Interface:**
@@ -341,29 +306,17 @@ interface SelectOption {
 ### FormTextarea
 
 | Prop             | Type                                         | Description                       |
-
 | ---------------- | -------------------------------------------- | --------------------------------- |
-
-| `name`           | `string`                                     | Textarea name                      |
-
+| `name`           | `string`                                     | Textarea name                     |
 | `value`          | `string`                                     | Current value                     |
-
 | `onChange`       | `(e: ChangeEvent<HTMLTextAreaElement>) => void` | Textarea change handler        |
-
 | `error`          | `string` *(optional)*                        | Error message (from hook)         |
-
 | `placeholder`    | `string` *(optional)*                        | Textarea placeholder text         |
-
 | `rows`           | `number` *(optional, default: 4)*            | Number of rows                    |
-
 | `cols`           | `number` *(optional)*                        | Number of columns                 |
-
 | `className`      | `string` *(optional)*                        | Wrapper className                 |
-
 | `textareaClassName` | `string` *(optional)*                        | Textarea element className        |
-
 | `showError`      | `boolean` *(default: true)*                  | Show error message below textarea |
-
 | `disabled`       | `boolean` *(optional)*                        | Disable the textarea              |
 
 
