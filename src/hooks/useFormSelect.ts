@@ -73,7 +73,7 @@ export const useFormSelect = ({
         const val = e.target.value;
         setValue(val);
         if (!suppressDefaultError) {
-            validate();
+            validateValue(val);
         }
     };
 

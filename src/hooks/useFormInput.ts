@@ -51,7 +51,7 @@ export const useFormInput = ({
     const [error, setError] = useState<string>('');
 
     const validateValue = (valToValidate: string): boolean => {
-        if (validations !== false && typeof validations !== 'object') {
+        if (validations !== false && typeof validations === 'object') {
             for (const key in validations as ValidationRules) {
                 const rule = validations[key as keyof ValidationRules];
                 if (key === 'regex' && typeof rule === 'string') {
@@ -96,7 +96,7 @@ export const useFormInput = ({
         const val = e.target.value;
         setValue(val);
         if (!suppressDefaultError) {
-            validate();
+            validateValue(val);
         }
     };
 
