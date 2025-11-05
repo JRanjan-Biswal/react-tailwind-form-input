@@ -6,12 +6,12 @@ const defaultValidators = {
 export const useFormSelect = ({ initialValue = '', validations = {}, customValidator, suppressDefaultError = false, ...props }) => {
     const [value, setValue] = useState(initialValue);
     const [error, setError] = useState('');
-    const validateValue = () => {
+    const validateValue = (valToValidate) => {
         if (validations !== false && typeof validations === 'object') {
             for (const key in validations) {
                 const rule = validations[key];
                 if (key === 'required' && rule === true) {
-                    const valid = defaultValidators.required(value);
+                    const valid = defaultValidators.required(valToValidate || value);
                     if (valid !== true) {
                         setError(valid);
                         return false;
@@ -38,13 +38,13 @@ export const useFormSelect = ({ initialValue = '', validations = {}, customValid
         const val = e.target.value;
         setValue(val);
         if (!suppressDefaultError) {
-            validateValue();
+            validateValue(e.target.value);
         }
     };
     const setValueWithValidation = (val) => {
         setValue(val);
         if (!suppressDefaultError) {
-            validateValue();
+            validateValue(val);
         }
     };
     return {

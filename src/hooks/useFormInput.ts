@@ -50,24 +50,24 @@ export const useFormInput = ({
     const [value, setValue] = useState<string>(initialValue);
     const [error, setError] = useState<string>('');
 
-    const validateValue = (): boolean => {
+    const validateValue = (valToValidate?: string): boolean => {
         if (validations !== false && typeof validations === 'object') {
             for (const key in validations as ValidationRules) {
                 const rule = validations[key as keyof ValidationRules];
                 if (key === 'regex' && typeof rule === 'string') {
-                    const valid = defaultValidators.regex(value, rule);
+                    const valid = defaultValidators.regex(valToValidate || value, rule);
                     if (valid !== true) {
                         setError(valid);
                         return false;
                     }
                 } else if (key === 'minLength' || key === 'maxLength') {
-                    const valid = defaultValidators[key](value, rule as number);
+                    const valid = defaultValidators[key](valToValidate || value, rule as number);
                     if (valid !== true) {
                         setError(valid);
                         return false;
                     }
                 } else if (key in defaultValidators && ['email', 'number', 'text'].includes(key)) {
-                    const valid = defaultValidators[key as 'email' | 'number' | 'text'](value);
+                    const valid = defaultValidators[key as 'email' | 'number' | 'text'](valToValidate || value);
                     if (valid !== true) {
                         setError(valid);
                         return false;
@@ -77,7 +77,7 @@ export const useFormInput = ({
         }
 
         if (customValidator) {
-            const result = customValidator(value);
+            const result = customValidator(valToValidate || value);
             if (result !== true) {
                 setError(result);
                 return false;
@@ -96,14 +96,14 @@ export const useFormInput = ({
         const val = e.target.value;
         setValue(val);
         if (!suppressDefaultError) {
-            validateValue();
+            validateValue(val);
         }
     };
 
     const setValueWithValidation = (val: string) => {
         setValue(val);
         if (!suppressDefaultError) {
-            validateValue();
+            validateValue(val);    
         }
     };
 
