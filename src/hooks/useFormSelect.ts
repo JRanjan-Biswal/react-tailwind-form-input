@@ -36,12 +36,12 @@ export const useFormSelect = ({
     const [value, setValue] = useState<string>(initialValue);
     const [error, setError] = useState<string>('');
 
-    const validateValue = (valToValidate: string): boolean => {
+    const validateValue = (): boolean => {
         if (validations !== false && typeof validations === 'object') {
             for (const key in validations as SelectValidationRules) {
                 const rule = validations[key as keyof SelectValidationRules];
                 if (key === 'required' && rule === true) {
-                    const valid = defaultValidators.required(valToValidate);
+                    const valid = defaultValidators.required(value);
                     if (valid !== true) {
                         setError(valid);
                         return false;
@@ -54,7 +54,7 @@ export const useFormSelect = ({
         const validatorToUse = customValidator || (validations !== false && typeof validations === 'object' ? validations.customValidator : undefined);
         
         if (validatorToUse) {
-            const result = validatorToUse(valToValidate);
+            const result = validatorToUse(value);
             if (result !== true) {
                 setError(result);
                 return false;
@@ -66,21 +66,21 @@ export const useFormSelect = ({
     };
 
     const validate = (): boolean => {
-        return validateValue(value);
+        return validateValue();
     };
 
     const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const val = e.target.value;
         setValue(val);
         if (!suppressDefaultError) {
-            validateValue(val);
+            validateValue();
         }
     };
 
     const setValueWithValidation = (val: string) => {
         setValue(val);
         if (!suppressDefaultError) {
-            validateValue(val);
+            validateValue();
         }
     };
 

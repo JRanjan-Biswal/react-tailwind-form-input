@@ -6,12 +6,12 @@ const defaultValidators = {
 export const useFormSelect = ({ initialValue = '', validations = {}, customValidator, suppressDefaultError = false, ...props }) => {
     const [value, setValue] = useState(initialValue);
     const [error, setError] = useState('');
-    const validateValue = (valToValidate) => {
+    const validateValue = () => {
         if (validations !== false && typeof validations === 'object') {
             for (const key in validations) {
                 const rule = validations[key];
                 if (key === 'required' && rule === true) {
-                    const valid = defaultValidators.required(valToValidate);
+                    const valid = defaultValidators.required(value);
                     if (valid !== true) {
                         setError(valid);
                         return false;
@@ -22,7 +22,7 @@ export const useFormSelect = ({ initialValue = '', validations = {}, customValid
         // Check for customValidator prop (takes precedence over validations.customValidator)
         const validatorToUse = customValidator || (validations !== false && typeof validations === 'object' ? validations.customValidator : undefined);
         if (validatorToUse) {
-            const result = validatorToUse(valToValidate);
+            const result = validatorToUse(value);
             if (result !== true) {
                 setError(result);
                 return false;
@@ -32,19 +32,19 @@ export const useFormSelect = ({ initialValue = '', validations = {}, customValid
         return true;
     };
     const validate = () => {
-        return validateValue(value);
+        return validateValue();
     };
     const onChange = (e) => {
         const val = e.target.value;
         setValue(val);
         if (!suppressDefaultError) {
-            validate();
+            validateValue();
         }
     };
     const setValueWithValidation = (val) => {
         setValue(val);
         if (!suppressDefaultError) {
-            validateValue(val);
+            validateValue();
         }
     };
     return {
