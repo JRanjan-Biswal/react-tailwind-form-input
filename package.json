@@ -1,6 +1,6 @@
 {
   "name": "react-tailwind-form-input",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A **React + TypeScript** component with built-in **validation**, styled using **Tailwind CSS**. Includes a custom hook `useFormInput` for managing input value, error state, and validation logic.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
