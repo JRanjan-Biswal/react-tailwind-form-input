@@ -44,6 +44,7 @@ export const useFormInput = ({
     validations = {},
     customValidator,
     suppressDefaultError = false,
+    ...props
 }: UseFormInputOptions): UseFormInputReturn => {
     const [value, setValue] = useState<string>(initialValue);
     const [error, setError] = useState<string>('');
@@ -99,5 +100,6 @@ export const useFormInput = ({
         error,
         onChange,
         validate,
+        ...props
     };
 };

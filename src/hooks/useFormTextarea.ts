@@ -6,7 +6,7 @@ export type TextareaValidationRules = {
     number?: boolean;
     text?: boolean;
     minLength?: number;
-    maxLength?: number;
+    maxLength?: number; 
     regex?: string;
 };
 
@@ -44,6 +44,7 @@ export const useFormTextarea = ({
     validations = {},
     customValidator,
     suppressDefaultError = false,
+    ...props
 }: UseFormTextareaOptions): UseFormTextareaReturn => {
     const [value, setValue] = useState<string>(initialValue);
     const [error, setError] = useState<string>('');
@@ -99,6 +100,7 @@ export const useFormTextarea = ({
         error,
         onChange,
         validate,
+        ...props
     };
 };
 

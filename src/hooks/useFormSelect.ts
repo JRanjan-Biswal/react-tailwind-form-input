@@ -30,6 +30,7 @@ export const useFormSelect = ({
     validations = {},
     customValidator,
     suppressDefaultError = false,
+    ...props
 }: UseFormSelectOptions): UseFormSelectReturn => {
     const [value, setValue] = useState<string>(initialValue);
     const [error, setError] = useState<string>('');
@@ -76,6 +77,7 @@ export const useFormSelect = ({
         error,
         onChange,
         validate,
+        ...props
     };
 };
 
