@@ -15,7 +15,8 @@ export interface CustomOptionProps {
 
 export interface FormSelectProps {
   name: string;
-  value: string;
+  value?: string;
+  defaultValue?: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: SelectOption[];
   error?: string;
@@ -30,6 +31,7 @@ export interface FormSelectProps {
 const FormSelect: React.FC<FormSelectProps> = ({
   name,
   value,
+  defaultValue,
   onChange,
   options,
   error,
@@ -45,6 +47,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
       <select
         name={name}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
         disabled={disabled}
         className={cn(

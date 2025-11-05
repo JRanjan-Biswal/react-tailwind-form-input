@@ -18,5 +18,5 @@ interface UseFormInputReturn {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     validate: () => boolean;
 }
-export declare const useFormInput: ({ initialValue, validations, customValidator, suppressDefaultError, }: UseFormInputOptions) => UseFormInputReturn;
+export declare const useFormInput: ({ initialValue, validations, customValidator, suppressDefaultError, ...props }: UseFormInputOptions) => UseFormInputReturn;
 export {};

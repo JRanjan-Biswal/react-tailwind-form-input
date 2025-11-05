@@ -14,5 +14,5 @@ interface UseFormSelectReturn {
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     validate: () => boolean;
 }
-export declare const useFormSelect: ({ initialValue, validations, customValidator, suppressDefaultError, }: UseFormSelectOptions) => UseFormSelectReturn;
+export declare const useFormSelect: ({ initialValue, validations, customValidator, suppressDefaultError, ...props }: UseFormSelectOptions) => UseFormSelectReturn;
 export {};

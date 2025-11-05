@@ -8,7 +8,7 @@ const defaultValidators = {
     maxLength: (val, len) => val.length <= len || `Maximum length is ${len}.`,
     regex: (val, pattern) => new RegExp(pattern).test(val) || 'Invalid format.',
 };
-export const useFormInput = ({ initialValue = '', validations = {}, customValidator, suppressDefaultError = false, }) => {
+export const useFormInput = ({ initialValue = '', validations = {}, customValidator, suppressDefaultError = false, ...props }) => {
     const [value, setValue] = useState(initialValue);
     const [error, setError] = useState('');
     const validate = () => {
@@ -60,5 +60,6 @@ export const useFormInput = ({ initialValue = '', validations = {}, customValida
         error,
         onChange,
         validate,
+        ...props
     };
 };

@@ -3,7 +3,7 @@ import { useState } from 'react';
 const defaultValidators = {
     required: (val) => val !== '' && val !== undefined && val !== null || 'This field is required.',
 };
-export const useFormSelect = ({ initialValue = '', validations = {}, customValidator, suppressDefaultError = false, }) => {
+export const useFormSelect = ({ initialValue = '', validations = {}, customValidator, suppressDefaultError = false, ...props }) => {
     const [value, setValue] = useState(initialValue);
     const [error, setError] = useState('');
     const validate = () => {
@@ -43,5 +43,6 @@ export const useFormSelect = ({ initialValue = '', validations = {}, customValid
         error,
         onChange,
         validate,
+        ...props
     };
 };

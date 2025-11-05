@@ -4,3 +4,4 @@ export { default as FormTextarea } from './components/FormTextarea';
 export { useFormInput } from './hooks/useFormInput';
 export { useFormSelect } from './hooks/useFormSelect';
 export { useFormTextarea } from './hooks/useFormTextarea';
+export { cn } from './utils/cn';
