@@ -11,26 +11,26 @@ const defaultValidators = {
 export const useFormTextarea = ({ initialValue = '', validations = {}, customValidator, suppressDefaultError = false, ...props }) => {
     const [value, setValue] = useState(initialValue);
     const [error, setError] = useState('');
-    const validate = () => {
+    const validateValue = (valToValidate) => {
         if (validations !== false && typeof validations === 'object') {
             for (const key in validations) {
                 const rule = validations[key];
                 if (key === 'regex' && typeof rule === 'string') {
-                    const valid = defaultValidators.regex(value, rule);
+                    const valid = defaultValidators.regex(valToValidate, rule);
                     if (valid !== true) {
                         setError(valid);
                         return false;
                     }
                 }
                 else if (key === 'minLength' || key === 'maxLength') {
-                    const valid = defaultValidators[key](value, rule);
+                    const valid = defaultValidators[key](valToValidate, rule);
                     if (valid !== true) {
                         setError(valid);
                         return false;
                     }
                 }
                 else if (key in defaultValidators && ['email', 'number', 'text'].includes(key)) {
-                    const valid = defaultValidators[key](value);
+                    const valid = defaultValidators[key](valToValidate);
                     if (valid !== true) {
                         setError(valid);
                         return false;
@@ -39,7 +39,7 @@ export const useFormTextarea = ({ initialValue = '', validations = {}, customVal
             }
         }
         if (customValidator) {
-            const result = customValidator(value);
+            const result = customValidator(valToValidate);
             if (result !== true) {
                 setError(result);
                 return false;
@@ -48,6 +48,9 @@ export const useFormTextarea = ({ initialValue = '', validations = {}, customVal
         setError('');
         return true;
     };
+    const validate = () => {
+        return validateValue(value);
+    };
     const onChange = (e) => {
         const val = e.target.value;
         setValue(val);
@@ -55,11 +58,18 @@ export const useFormTextarea = ({ initialValue = '', validations = {}, customVal
             validate();
         }
     };
+    const setValueWithValidation = (val) => {
+        setValue(val);
+        if (!suppressDefaultError) {
+            validateValue(val);
+        }
+    };
     return {
         value,
         error,
         onChange,
         validate,
+        setValue: setValueWithValidation,
         ...props
     };
 };

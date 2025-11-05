@@ -17,6 +17,7 @@ interface UseFormTextareaReturn {
     error: string;
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     validate: () => boolean;
+    setValue: (value: string) => void;
 }
 export declare const useFormTextarea: ({ initialValue, validations, customValidator, suppressDefaultError, ...props }: UseFormTextareaOptions) => UseFormTextareaReturn;
 export {};

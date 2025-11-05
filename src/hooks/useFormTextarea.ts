@@ -22,6 +22,7 @@ interface UseFormTextareaReturn {
     error: string;
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     validate: () => boolean;
+    setValue: (value: string) => void;
 }
 
 const defaultValidators = {
@@ -49,24 +50,24 @@ export const useFormTextarea = ({
     const [value, setValue] = useState<string>(initialValue);
     const [error, setError] = useState<string>('');
 
-    const validate = (): boolean => {
+    const validateValue = (valToValidate: string): boolean => {
         if (validations !== false && typeof validations === 'object') {
             for (const key in validations as TextareaValidationRules) {
                 const rule = validations[key as keyof TextareaValidationRules];
                 if (key === 'regex' && typeof rule === 'string') {
-                    const valid = defaultValidators.regex(value, rule);
+                    const valid = defaultValidators.regex(valToValidate, rule);
                     if (valid !== true) {
                         setError(valid);
                         return false;
                     }
                 } else if (key === 'minLength' || key === 'maxLength') {
-                    const valid = defaultValidators[key](value, rule as number);
+                    const valid = defaultValidators[key](valToValidate, rule as number);
                     if (valid !== true) {
                         setError(valid);
                         return false;
                     }
                 } else if (key in defaultValidators && ['email', 'number', 'text'].includes(key)) {
-                    const valid = defaultValidators[key as 'email' | 'number' | 'text'](value);
+                    const valid = defaultValidators[key as 'email' | 'number' | 'text'](valToValidate);
                     if (valid !== true) {
                         setError(valid);
                         return false;
@@ -76,7 +77,7 @@ export const useFormTextarea = ({
         }
 
         if (customValidator) {
-            const result = customValidator(value);
+            const result = customValidator(valToValidate);
             if (result !== true) {
                 setError(result);
                 return false;
@@ -87,6 +88,10 @@ export const useFormTextarea = ({
         return true;
     };
 
+    const validate = (): boolean => {
+        return validateValue(value);
+    };
+
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const val = e.target.value;
         setValue(val);
@@ -95,11 +100,19 @@ export const useFormTextarea = ({
         }
     };
 
+    const setValueWithValidation = (val: string) => {
+        setValue(val);
+        if (!suppressDefaultError) {
+            validateValue(val);
+        }
+    };
+
     return {
         value,
         error,
         onChange,
         validate,
+        setValue: setValueWithValidation,
         ...props
     };
 };
