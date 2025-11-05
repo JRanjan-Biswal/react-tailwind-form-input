@@ -1,5 +1,6 @@
 // src/components/FormTextarea.tsx
 import React from 'react';
+import { cn } from '../utils/cn';
 
 export interface FormTextareaProps {
   name: string;
@@ -23,13 +24,13 @@ const FormTextarea: React.FC<FormTextareaProps> = ({
   placeholder,
   rows = 4,
   cols,
-  className = '',
-  textareaClassName = '',
+  className,
+  textareaClassName,
   showError = true,
   disabled = false,
 }) => {
   return (
-    <div className={`flex flex-col mb-4 ${className}`}>
+    <div className={cn('flex flex-col mb-4', className)}>
       <textarea
         name={name}
         value={value}
@@ -38,7 +39,12 @@ const FormTextarea: React.FC<FormTextareaProps> = ({
         rows={rows}
         cols={cols}
         disabled={disabled}
-        className={`border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y ${error ? 'border-red-500' : 'border-gray-300'} ${disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white'} ${textareaClassName}`}
+        className={cn(
+          'border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y',
+          error ? 'border-red-500' : 'border-gray-300',
+          disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white',
+          textareaClassName
+        )}
       />
       {showError && error && (
         <span className="text-sm text-red-500 mt-1">{error}</span>
